@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Mini World Clock",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Mini clock for time zones I need quick info on",
   "action": {
     "default_popup": "index.html",
