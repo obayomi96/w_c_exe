@@ -182,31 +182,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!searchValue) {
     updateSearchedTime(searchValue);
     document.getElementById("result-div").style.display = "none";
-    document.getElementById("def1").style.display = "block";
-    document.getElementById("def2").style.display = "block";
-    document.getElementById("def3").style.display = "block";
   } else {
-    document.getElementById("def1").style.display = "none";
-    document.getElementById("def2").style.display = "none";
-    document.getElementById("def3").style.display = "none";
     document.getElementById("result-div").style.display = "block";
   }
   searchInput.addEventListener("keyup", handleSearch);
-  setInterval(updateDefaultTimes, 1000);
 });
-
-const updateDefaultTimes = () => {
-  let d = new Date();
-  document.getElementById("nigeria").innerHTML = d
-    .toLocaleString("en-US", { timeZone: timeZones["Nigeria"] })
-    .split(", ")[1];
-  document.getElementById("usa").innerHTML = d
-    .toLocaleString("en-US", { timeZone: timeZones["USA"] })
-    .split(", ")[1];
-  document.getElementById("austria").innerHTML = d
-    .toLocaleString("en-US", { timeZone: timeZones["Austria"] })
-    .split(", ")[1];
-};
 
 const updateSearchedTime = (country) => {
   let d = new Date();
@@ -216,15 +196,9 @@ const updateSearchedTime = (country) => {
       .toLocaleString("en-US", { timeZone })
       .split(", ")[1];
     document.getElementById("result-div").style.display = "block";
-    document.getElementById("def1").style.display = "none";
-    document.getElementById("def2").style.display = "none";
-    document.getElementById("def3").style.display = "none";
     document.getElementById("search-term").innerText = country;
   } else {
     document.getElementById("result-div").style.display = "none";
-    document.getElementById("def1").style.display = "block";
-    document.getElementById("def2").style.display = "block";
-    document.getElementById("def3").style.display = "block";
     document.getElementById("search-result").innerText = "Not found";
     document.getElementById("search-term").innerText = "";
   }
@@ -244,10 +218,5 @@ const handleSearch = () => {
     document.getElementById("result-div").style.display = "block";
   } else {
     document.getElementById("result-div").style.display = "none";
-    document.getElementById("def1").style.display = "block";
-    document.getElementById("def2").style.display = "block";
-    document.getElementById("def3").style.display = "block";
   }
 };
-
-setInterval(updateDefaultTimes, 1000);
