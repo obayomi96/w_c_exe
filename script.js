@@ -163,44 +163,35 @@ const timeZones = {
   Ukraine: "Europe/Kiev",
   "United Arab Emirates": "Asia/Dubai",
   "United Kingdom": "Europe/London",
-  USA: "America/New_York",
+  "New York, USA": "America/New_York",
+  "Chicago, USA": "America/Chicago",
+  "Los Angeles, USA": "America/Los_Angeles",
+  "Dallas, USA": "America/Chicago",
+  "Denver, USA": "America/Denver",
+  "San Francisco, USA": "America/Los_Angeles",
   Uruguay: "America/Montevideo",
   Uzbekistan: "Asia/Tashkent",
-  Vanuatu: "Pacific/Efate",
   Venezuela: "America/Caracas",
   Vietnam: "Asia/Ho_Chi_Minh",
-  "Western Sahara": "Africa/El_Aaiun",
-  Yemen: "Asia/Aden",
   Zambia: "Africa/Lusaka",
   Zimbabwe: "Africa/Harare",
 };
-// 174
 
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("search-input");
-  const searchValue = document.getElementById("search-input").value.trim();
-  if (!searchValue) {
-    updateSearchedTime(searchValue);
-    document.getElementById("result-div").style.display = "none";
-  } else {
-    document.getElementById("result-div").style.display = "block";
-  }
   searchInput.addEventListener("keyup", handleSearch);
 });
 
-const updateSearchedTime = (country) => {
-  let d = new Date();
-  const timeZone = timeZones[country];
+const updateSearchedTime = (location) => {
+  const d = new Date();
+  const timeZone = timeZones[location];
   if (timeZone) {
-    document.getElementById("search-result").innerHTML = d
-      .toLocaleString("en-US", { timeZone })
-      .split(", ")[1];
+    const currentTime = d.toLocaleString("en-US", { timeZone }).split(", ")[1];
+    document.getElementById("search-term").innerText = location;
+    document.getElementById("search-result").innerText = currentTime;
     document.getElementById("result-div").style.display = "block";
-    document.getElementById("search-term").innerText = country;
   } else {
     document.getElementById("result-div").style.display = "none";
-    document.getElementById("search-result").innerText = "Not found";
-    document.getElementById("search-term").innerText = "";
   }
 };
 
@@ -209,13 +200,13 @@ const handleSearch = () => {
     .getElementById("search-input")
     .value.trim()
     .toLowerCase();
-  const matchingCountry = Object.keys(timeZones).find(
-    (country) => country.toLowerCase() === searchValue
+
+  const matchingLocation = Object.keys(timeZones).find((location) =>
+    location.toLowerCase().includes(searchValue)
   );
 
-  if (matchingCountry) {
-    updateSearchedTime(matchingCountry);
-    document.getElementById("result-div").style.display = "block";
+  if (matchingLocation) {
+    updateSearchedTime(matchingLocation);
   } else {
     document.getElementById("result-div").style.display = "none";
   }
